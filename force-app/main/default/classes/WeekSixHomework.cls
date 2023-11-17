@@ -37,6 +37,12 @@ public with sharing class WeekSixHomework {
         // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_set.htm
         //Hint:  can you print out a boolean that indicates if the set is empty?  Can you clone it?
 
+        System.debug(daysOfWeek.isEmpty());
+        //USER_DEBUG [31]|DEBUG|false
+        
+        
+        
+
 
     }
 
@@ -45,19 +51,33 @@ public with sharing class WeekSixHomework {
         //Time to get creative!  
 
         // 1. Create a new Map.  You can use whatever primitives/object types you like, as long as they make sense.
-        // Try to add at least 5 Key/value pairs.
+        // Try to add at least 5 Key/value pairs.        
+        Map<String, Integer> areaCodes = new Map<String, Integer>();
+        areaCodes.put('Orlando',407);
+        areaCodes.put('Vero Beach', 772);
+        areaCodes.put('Port St. Lucie',772);
+        areaCodes.put('Palm Beach',561);
+        areaCodes.put('Miami',305);
 
 
         //Now, in the debug log, print out  a list of the values.
+        System.debug(areaCodes);
 
 
         //Can you print out a set of the Keys?
+        Set<String> keys = areaCodes.keySet();
+		System.debug(keys);
+       
 
 
 
         // 2. Bonus!  Check out the documentation on Maps. Go to the section titled Map Methods.  Manipulate the Map using one of the methods defined in the documentation
         // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_map.htm
         // Hint: Can you remove an entry using the key?  Can you clear out the map without deleting it?
+        System.debug(areaCodes.toString());
+        System.debug(areaCodes.remove('Orlando'));
+        
+        
 
 
     }
@@ -74,8 +94,25 @@ public with sharing class WeekSixHomework {
         //3.  Bonus! Using the documentation on standard List methods from Salesforce, add the items from your first list, to your second list with one command
         // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_list.htm
 
+            
+        /* team1.addAll(team2); 
+        System.debug(team2);
+        System.debug(team2.size());
+        
+        this code did not work and I had a hard time understanding why
+        turns out I used the addAll() method wrong */
+        
+        team2.addAll(team1); 
+        System.debug(team2);
+        System.debug(team2.size());
+        
+        // USER_DEBUG [19]|DEBUG|(Angie, Mandie, Swati, Molly, Michelle, Betul, Kristi, Elyysa, Isabel, Ujwala)
+        // USER_DEBUG [20]|DEBUG|10
 
         //4.  Can you now loop through your combined list and print it to the debug log?  (Hint:  Check the documentation!)
+        for (String s : team2){
+            System.debug(s);
+        }
 
     }
         
