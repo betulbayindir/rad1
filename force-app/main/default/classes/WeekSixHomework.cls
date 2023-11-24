@@ -43,7 +43,6 @@ public with sharing class WeekSixHomework {
         
         
 
-
     }
 
     public static void mapsReview () {
