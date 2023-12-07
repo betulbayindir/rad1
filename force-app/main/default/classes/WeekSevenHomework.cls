@@ -17,15 +17,14 @@ public with sharing class WeekSevenHomework {
 
            List<Account> acctList = new List<Account>();
                 
-        for (Integer i = 1; i <= numberOfAccounts; i++) {
+           for (Integer i = 1; i <= numberOfAccounts; i++) {
 	// Changed Integer i from 0 to 1 because we want to start naming Accounts starting from 1.
                     Account a = new Account();
-                    a.Name = 'Sample Account' + i;
+                    a.Name = 'Sample Account ' + i;
 	// Changed a.Name formatting to fit given naming convention
 					acctList.add(a);
             
 	//Adding the Account created into our list acctList
-	System.debug(a.Name);
                 }
         
                 insert acctList;
@@ -47,16 +46,12 @@ public with sharing class WeekSevenHomework {
 	//Fixed typo in variable name. Descritpion -> Description
 	//Changed comparison operator (==) to assignment operator (=)
                     casesToInsert.add(c);
-                    
-	/* WRONG: Added a DML operation to insert new cases.
-	
-					insert casesToInsert;
-	I'd accidentally added the DML inside the loop. Fixing it in line 47 */
                 }
-					insert casesToInsert;
-	// I proofread my first code! Unfortunately, even though the code does not have 'problems', 
-	// the DML operation does not work. I think the issue might be with my first loop,
-	// or I might have messed up the increment.
+					insert casesToInsert; //* make sure DML is outside the loop!
+    /* Execute Anonymous:
+	Integer numberOfAccountsToCreate = 2;
+	WeekSevenHomework.createSampleAccounts(numberOfAccountsToCreate);
+	*/
 
 
 }
