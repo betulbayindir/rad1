@@ -28,7 +28,7 @@ trigger StockItemTrigger on Stock_Item__c (before insert, before delete) {
 
 
 
-//TRYING AGAIN WITH QUERY
+//TRYING AGAIN USING SOQL AND LIST
         List<Stock_Item__c> existingItems = [SELECT Item_Name__c FROM Stock_Item__c];
         for(Stock_Item__c newItem : Trigger.new) {
             for(Stock_Item__c existingItem : existingItems) {
@@ -48,27 +48,30 @@ trigger StockItemTrigger on Stock_Item__c (before insert, before delete) {
         
 		// Before Stock Item is deleted, check if Stock_on_Hand__c = 0  
 		// If not, create case:
-		// indicate name of deleted item, id, and the number of stock on hand when it was deleted in the descrip  	
+		// indicate name of deleted item, id, and the number of stock on hand when it was deleted in the description
 		
-    //    if(Stock_on_Hand__c != 0){
-	//            }
         
-     //   List<Case> c = new List<Case>(); // Creates a case if a stock item is deleted before stock has ran out.
-    //    for(Stock_Item__c stockOnHand : Trigger.new){
-    //        Case newCase = new Case(
-                
-      //      )
+      	List<Case> newCases = new List<Case>(); // Creates a case if a stock item is deleted before stock has ran out.
+        
+             for (Stock_Item__c s: Trigger.old) {
+            if (s.Stock_on_Hand__c != 0) {
+                System.debug('CASE EXECUTED?'); // ?????????
+                Case cse = new Case();
+                cse.Status = 'New';
+                cse.Priority = 'High';
+                cse.Origin = 'Questionable Contact';
+                cse.Subject = 'A stock item has been deleted before stock ran out';
+                cse.ContactId = s.Id;
+                cse.Description = 'The item ' + s.Item_Name__c + ' (id: ' + s.Id + ')' +  ' has been deleted while stock was ' + s.Stock_on_Hand__c ;
+                newCases.add(cse);
+            
+        }
       
-      //          }
+                }
         
 
-        
-        
-        
-        
-        
-        
-        
+       
+              
         
    }
     /* 3. We need a method that can be called from elsewhere in our codebase called getLowStockItems
